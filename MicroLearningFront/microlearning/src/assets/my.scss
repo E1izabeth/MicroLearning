@@ -1,0 +1,171 @@
+@import "bootstrap";
+
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+
+.slide-fade-leave-active {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active до версии 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
+.fade-enter-active {
+  transition: all .3s ease;
+}
+.fade-leave-active {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);;
+}
+.fade-enter, .fade-leave-to
+/* .slide-fade-leave-active до версии 2.1.8 */ {
+  opacity: 0;
+}
+
+html, body, #app{
+  height: 100%;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+
+
+$nav-tabs-link-active-color: #714216;
+$nav-link-disabled-color:lightgrey;
+//$navbar-dark-color:#aecf00;
+//$navbar--active-color:#aecf00;
+//$nav-link-disabled-color
+
+
+// Bootstrap and its default variables
+@import '../../node_modules/bootstrap/scss/bootstrap';
+// BootstrapVue and its default variables
+@import '../../node_modules/bootstrap-vue/src/index.scss';
+
+$mynewBrowncolor: #714216;
+
+.btn-primary {
+    @include button-variant($mynewBrowncolor, darken($mynewBrowncolor, 7.5%), darken($mynewBrowncolor, 10%), lighten($mynewBrowncolor,5%), lighten($mynewBrowncolor, 10%), darken($mynewBrowncolor,30%));
+}
+
+.btn-outline-primary {
+    @include button-outline-variant($mynewBrowncolor, white, lighten($mynewBrowncolor,5%), $mynewBrowncolor);
+}
+
+$mynewGreencolor: #aecf00;
+
+.btn-success {
+    // @include button-variant($mynewGreencolor, darken($mynewGreencolor, 7.5%), darken($mynewGreencolor, 10%), lighten($mynewGreencolor,5%), lighten($mynewGreencolor, 10%), darken($mynewGreencolor,30%));
+
+    color: white;
+    background-color: $mynewGreencolor;
+
+    &:hover{
+      background-color: $mynewGreencolor;
+      color: $mynewBrowncolor;
+      border-color: $mynewBrowncolor;
+      box-shadow: 0 0 5px $mynewBrowncolor;
+    }
+}
+
+.btn-outline-success {
+    @include button-outline-variant($mynewGreencolor, white, lighten($mynewGreencolor,5%), $mynewGreencolor);
+}
+
+
+.nav-link{
+  color:#714216;
+}
+
+.nav-link:hover{
+  color:#aecf00;
+}
+
+#profile-page small {
+  text-align: left;
+}
+#profile-page legend {
+  text-align: left;
+}
+
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+#profile-page fieldset,
+#profile-page label,
+#profile-page button {
+  @extend .mb-2;
+  @extend .mr-sm-2;
+  @extend .mb-0;
+}
+
+
+#list {
+  & > .list-group-item {
+    &:hover {
+      @extend .list-group-item-action;
+    }
+
+    & > .container {
+      & > .row {
+        &:first-child > .col:first-child { // title
+          @extend .d-flex;
+          @extend .px-0;
+        }
+        &:first-child > .col:last-child { // status 1
+          @extend .px-0;
+        }
+        & > .col {
+          @extend .px-3;
+        }
+        & > .col:first-child {
+          @extend .col-sm-auto;
+          @extend .text-left;
+        }
+        & > .col:last-child {
+          @extend .text-right;
+        }
+        &:last-child > .col:last-child { // status 2
+          @extend .px-0;
+        }
+      }
+    }
+  }
+}
+
+/*
+#home.row {
+  height: 100%;
+  width: 100%;
+
+  & > .column {
+    float: left;
+    width: 50%;
+    height: 75%;
+    display: table;
+
+    & > .form-container {
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+    }
+  }
+
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+*/
+
+html {
+  min-width: 850px;
+}

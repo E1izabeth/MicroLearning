@@ -1,0 +1,16 @@
+{
+  "TypeName": "System.Net.WebException",
+  "Message": "Could not find file \u0027D:\\portable-project.ru\\elizabeth-va\\Testing\\MicroLearningSvc\\MicroLearningSvc\\bin\\x64\\Debug\\xsafdasdf\u0027.",
+  "StackTrace": "   at System.Net.WebClient.DownloadDataInternal(Uri address, WebRequest\u0026 request)\r\n   at System.Net.WebClient.DownloadData(Uri address)\r\n   at MicroLearningSvc.Impl.LearningServiceContext.DownloadContent(String resourceUrl) in D:\\portable-project.ru\\elizabeth-va\\Testing\\MicroLearningSvc\\MicroLearningSvc\\Impl\\LearningServiceContext.cs:line 152\r\n   at MicroLearningSvc.Impl.LearningServiceImpl.SuggestResourceTags(CreateResourceSpecType spec) in D:\\portable-project.ru\\elizabeth-va\\Testing\\MicroLearningSvc\\MicroLearningSvc\\Impl\\LearningServiceImpl.cs:line 311\r\n   at SyncInvokeSuggestResourceTags(Object , Object[] , Object[] )\r\n   at System.ServiceModel.Dispatcher.SyncMethodInvoker.Invoke(Object instance, Object[] inputs, Object[]\u0026 outputs)\r\n   at System.ServiceModel.Dispatcher.DispatchOperationRuntime.InvokeBegin(MessageRpc\u0026 rpc)\r\n   at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage5(MessageRpc\u0026 rpc)\r\n   at System.ServiceModel.Dispatcher.ImmutableDispatchRuntime.ProcessMessage11(MessageRpc\u0026 rpc)\r\n   at System.ServiceModel.Dispatcher.MessageRpc.Process(Boolean isOperationContextSet)",
+  "InnerError": {
+    "TypeName": "System.Net.WebException",
+    "Message": "Could not find file \u0027D:\\portable-project.ru\\elizabeth-va\\Testing\\MicroLearningSvc\\MicroLearningSvc\\bin\\x64\\Debug\\xsafdasdf\u0027.",
+    "StackTrace": "   at System.Net.FileWebResponse..ctor(FileWebRequest request, Uri uri, FileAccess access, Boolean asyncHint)\r\n   at System.Net.FileWebRequest.GetResponseCallback(Object state)",
+    "InnerError": {
+      "TypeName": "System.IO.FileNotFoundException",
+      "Message": "Could not find file \u0027D:\\portable-project.ru\\elizabeth-va\\Testing\\MicroLearningSvc\\MicroLearningSvc\\bin\\x64\\Debug\\xsafdasdf\u0027.",
+      "StackTrace": "   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)\r\n   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)\r\n   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)\r\n   at System.Net.FileWebStream..ctor(FileWebRequest request, String path, FileMode mode, FileAccess access, FileShare sharing, Int32 length, Boolean async)\r\n   at System.Net.FileWebResponse..ctor(FileWebRequest request, Uri uri, FileAccess access, Boolean asyncHint)",
+      "InnerError": null
+    }
+  }
+}
