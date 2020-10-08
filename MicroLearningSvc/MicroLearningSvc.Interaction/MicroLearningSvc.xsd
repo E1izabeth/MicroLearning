@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="MicroLearningSvc"
+           targetNamespace="MicroLearningSvc"
+           elementFormDefault="qualified"
+           xmlns="MicroLearningSvc"
+           xmlns:mstns="MicroLearningSvc"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- Region profile management -->
+
+  <xs:element name="Ok" type="OkType" />
+
+  <xs:complexType name="OkType">
+  </xs:complexType>
+
+  <xs:element name="RegisterSpec" type="RegisterSpecType" />
+
+  <xs:complexType name="RegisterSpecType">
+    <xs:attribute name="Login" type="string" use="required" />
+    <xs:attribute name="Password" type="string" use="required" />
+    <xs:attribute name="Email" type="string" use="required" />
+  </xs:complexType>
+
+  <xs:element name="RequestActivationSpec" type="RequestActivationSpecType" />
+
+  <xs:complexType name="RequestActivationSpecType">
+    <xs:attribute name="Email" type="string" use="required" />
+  </xs:complexType>
+
+  <xs:element name="ChangePasswordSpec" type="ChangePasswordSpecType" />
+
+  <xs:complexType name="ChangePasswordSpecType">
+    <!--<xs:attribute name="OldPassword" type="string" use="required" />-->
+    <xs:attribute name="NewPassword" type="string" use="required" />
+    <xs:attribute name="Email" type="string" use="required" />
+  </xs:complexType>
+
+  <xs:element name="ChangeEmailSpec" type="ChangeEmailSpecType" />
+
+  <xs:complexType name="ChangeEmailSpecType">
+    <xs:attribute name="Password" type="string" use="required" />
+    <xs:attribute name="OldEmail" type="string" use="required" />
+    <xs:attribute name="NewEmail" type="string" use="required" />
+  </xs:complexType>
+
+  <xs:element name="ResetPasswordSpec" type="ResetPasswordSpecType"/>
+
+  <xs:complexType name="ResetPasswordSpecType">
+    <xs:attribute name="Login" type="string" use="required" />
+    <xs:attribute name="Email" type="string" use="required" />
+  </xs:complexType>
+
+  <xs:element name="LoginSpec" type="LoginSpecType"/>
+
+  <xs:complexType name="LoginSpecType">
+    <xs:attribute name="Login" type="string" use="required" />
+    <xs:attribute name="Password" type="string" use="required" />
+  </xs:complexType>
+
+  <xs:element name="ProfileFootprintInfo" type="ProfileFootprintInfoType"/>
+
+  <xs:complexType name="ProfileFootprintInfoType">
+    <xs:attribute name="Login" type="string" use="required" />
+    <xs:attribute name="EmailFootprint" type="string" use="required" />
+    <xs:attribute name="IsActivated" type="bool" use="required" />
+  </xs:complexType>
+
+  <!-- EndRegion -->
+
+  <!-- Region topics -->
+  
+  <xs:element name="CreateTopicSpec" type="CreateTopicSpecType"/>
+
+  <xs:complexType name="CreateTopicSpecType">
+    <xs:sequence>
+      <xs:element name="AssociationTags" type="AssociationTagsListType" />
+    </xs:sequence>
+    <xs:attribute name="TopicName" type="string" use="required" />
+  </xs:complexType>
+
+  <xs:element name="TopicsList" type="TopicsListType" />
+
+  <xs:complexType name="TopicsListType">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="Topic" type="TopicInfoType" />
+    </xs:choice>
+    <xs:attribute name="Count" type="int" use="required" />
+  </xs:complexType>
+
+  <xs:element name="TopicInfo" type="TopicInfoType" />
+
+  <xs:complexType name="TopicInfoType">
+    <xs:sequence>
+      <xs:element name="AssociationTags" type="AssociationTagsListType" />
+    </xs:sequence>
+    <xs:attribute name="Title" type="string" use="required" />
+    <xs:attribute name="Id" type="long" use="required" />
+    <xs:attribute name="IsActive" type="bool" use="required" />
+    <xs:attribute name="TotalContentParts" type="long" use="optional" />
+    <xs:attribute name="LearnedContentParts" type="long" use="optional" />
+    <xs:attribute name="DeliveryIntervalSeconds" type="long" use="optional" />
+  </xs:complexType>
+
+  <xs:element name="ActivateTopicSpec" type="ActivateTopicSpecType" />
+
+  <xs:complexType name="ActivateTopicSpecType">
+    <xs:attribute name="DueSeconds" type="long" use="required" />
+    <xs:attribute name="IntervalSeconds" type="long" use="required" />
+  </xs:complexType>
+
+  <!-- EndRegion -->
+
+  <!-- Region resources -->
+
+  <xs:element name="ResourceFilterSpec" type="ResourceFilterSpecType" />
+
+  <xs:complexType name="ResourceFilterSpecType">
+    <xs:sequence>
+      <xs:group ref="ResourceFilterSpecParametersGroup" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:group name="ResourceFilterSpecParametersGroup">
+    <xs:choice>
+      <xs:element name="ByKeywords" type="ResourceFilterByKeywordsSpec" />
+      <xs:element name="ByTopic" type="ResourceFilterByTopicSpec" />
+    </xs:choice>
+  </xs:group>
+
+  <xs:complexType name="ResourceFilterSpecParametersBaseType" abstract="true">
+  </xs:complexType>
+
+  <xs:complexType name="ResourceFilterByTopicSpec">
+    <xs:complexContent>
+      <xs:extension base="ResourceFilterSpecParametersBaseType">
+        <xs:attribute name="TopicId" type="long" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ResourceFilterByKeywordsSpec">
+    <xs:complexContent>
+      <xs:extension base="ResourceFilterSpecParametersBaseType">
+        <xs:sequence>
+          <xs:element name="AssociationTags" type="AssociationTagsListType" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="CreateResourceSpec" type="CreateResourceSpecType"/>
+
+  <xs:complexType name="CreateResourceSpecType">
+    <xs:sequence>
+      <xs:element name="AssociationTags" type="AssociationTagsListType" />
+    </xs:sequence>
+    <xs:attribute name="ResourceTitle" type="string" use="required" />
+    <xs:attribute name="ResourceUrl" type="string" use="required" />
+  </xs:complexType>
+
+  <xs:element name="ResourcesList" type="ResourcesListType" />
+
+  <xs:complexType name="ResourcesListType">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="Resource" type="ResourceInfoType" />
+    </xs:choice>
+    <xs:attribute name="Count" type="int" use="required" />
+  </xs:complexType>
+
+  <xs:element name="ResourceInfo" type="ResourceInfoType" />
+
+  <xs:complexType name="ResourceInfoType">
+    <xs:sequence>
+      <xs:element name="AssociationTags" type="AssociationTagsListType" />
+    </xs:sequence>
+    <xs:attribute name="Title" type="string" use="required" />
+    <xs:attribute name="Url" type="xs:anyURI" use="required" />
+    <xs:attribute name="IsValidated" type="bool" use="required" />
+    <xs:attribute name="IsMyResource" type="bool" use="required" />
+    <xs:attribute name="Id" type="long" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="AssociationTagsListType">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="Tag" type="AssociationTagInfoType"  />
+    </xs:choice>
+  </xs:complexType>
+
+  <xs:complexType name="AssociationTagInfoType">
+    <xs:attribute name="Word" type="word" use="required" />
+    <xs:attribute name="Id" type="long" use="optional" />
+  </xs:complexType>
+
+  <!-- EndRegion -->
+
+  <!-- Region content part -->
+
+  <xs:element name="ContentPartsList" type="ContentPartsListType" />
+
+  <xs:complexType name="ContentPartsListType">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="ContentPart" type="ContentPartInfoType" />
+    </xs:choice>
+    <xs:attribute name="Count" type="int" use="required" />
+  </xs:complexType>
+
+  <xs:element name="ContentPartInfo" type="ContentPartInfoType" />
+
+  <xs:complexType name="ContentPartInfoType">
+    <xs:sequence>
+      <xs:element name="Text" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="Order" type="long" use="required" />
+    <xs:attribute name="ResourceId" type="long" use="required" />
+    <xs:attribute name="Id" type="long" use="required" />
+    <xs:attribute name="IsDelivered" type="bool" use="required" />
+    <xs:attribute name="IsLearned" type="bool" use="required" />
+  </xs:complexType>
+
+  <!-- EndRegion -->
+
+  <!-- Region Simple types -->
+
+  <xs:simpleType name="Guid">
+    <xs:restriction base="string">
+      <xs:pattern value="^({)?(?(1)|(\()?)[0-9A-F]{8}(-)?([0-9A-F]{4}(?(3)-)){3}[0-9A-F]{12}(?(1)}|(?(2)\)))$" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="word">
+    <xs:restriction base="string">
+      <xs:pattern value="[\w]+" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- EndRegion -->
+
+  <!-- Region builtins-->
+
+  <xs:simpleType name="int">
+    <xs:restriction base="xs:int" />
+  </xs:simpleType>
+
+  <xs:simpleType name="long">
+    <xs:restriction base="xs:long" />
+  </xs:simpleType>
+
+  <xs:simpleType name="string">
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+
+  <xs:simpleType name="bool">
+    <xs:restriction base="xs:boolean" />
+  </xs:simpleType>
+
+  <xs:element name="ErrorInfo" type="ErrorInfoType" />
+
+  <xs:complexType name="ErrorInfoType">
+    <xs:sequence>
+      <xs:element name="Message" type="xs:string" />
+      <xs:element name="StackTrace" type="xs:string" />
+      <xs:element name="InnerError" type="ErrorInfoType" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+    <xs:attribute name="TypeName" type="xs:string" use="required" />
+  </xs:complexType>
+
+  <xs:complexType name="ExtendedErrorInfoType">
+    <xs:complexContent>
+      <xs:extension base="ErrorInfoType">
+        <xs:sequence>
+          <xs:element name="RawErrorInfo" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <!-- EndRegion -->
+
+</xs:schema>
